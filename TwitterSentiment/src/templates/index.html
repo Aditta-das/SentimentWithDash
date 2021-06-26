@@ -1,0 +1,131 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="5">
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>CostFunction()</title>
+  </head>
+  <body>
+  	<div class="container mt-4">
+  		<h3 style="display:flex; justify-content: center; font-weight: bold; cursor: pointer;">CostFunction</h3>
+  		<p style="display:flex; justify-content: center;">Situation of earth - World should be happy</p>
+  	</div>
+  	<div class="container">
+	    <div class="input-group rounded" style="display: flex; justify-content: center;">
+	    	<form method="post" action="/" class="col-md-10" style="justify-content: center; display: flex;">
+    			<input type="text" name="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+		    	aria-describedby="search-addon" />
+			  	<input type = "submit" class="btn btn-danger" value="search" style="margin-left: 10px;" />
+	    	</form>
+			</div>
+  	</div>
+  	<div class="container mt-5" style="justify-content: center; display: flex;">
+  		<canvas id="myChart" class="mychart"></canvas>
+  	</div>
+  	<div class="container mt-5 fixed-height-chart">
+			<canvas id="myChart2" style="position: relative !important; height:40vh !important; width:80vw !important;"></canvas>
+		</div>
+  	<div class="container mt-5">
+  		<table class="table">
+			  <thead>
+			    <tr>
+			      <!-- <th scope="col">Id</th> -->
+			      <th scope="col">Created At</th>
+			      <th scope="col">Tweet</th>
+			      <th scope="col">Score</th>
+			      <th scope="col">Sentiment</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for d in data %}
+			    <tr>
+			    	<td>{{ d[1] }}</td>
+			    	<td>{{ d[2] }}</td>
+			    	<td>{{ d[3] }}</td>
+			    	<td>{{ d[4] }}</td>
+			    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+  	</div>
+  	<style>
+  		/*canvas{
+			  width:800px !important;
+			  height:400px !important;
+			}*/
+			.fixed-height-chart {
+				height: 210px !important;
+				width: 210px !important;
+			}
+  	</style>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+    <script>
+    	let myChart = document.getElementById("myChart").getContext('2d');
+    	var xValues = [{% for item in data %}
+    										'{{ item[1] }}',
+    										{% endfor %}];
+			var yValues = [{% for item in data %}
+    										'{{ item[3] }}',
+    										{% endfor %}];
+
+			new Chart("myChart", {
+			  type: "line",
+			  data: {
+			    labels: xValues,
+			    datasets: [{
+			      fill: false,
+			      lineTension: 0,
+			      backgroundColor: "rgba(255,99,132)",
+			      // borderColor: "rrgb(255, 99, 132)",
+			      data: yValues,
+			      label: "World Sentiment Twitter Data Using vaderSentiment"
+			    }]
+			  },
+			  options: {
+			    legend: {display: "true"},
+			  }
+			});
+    </script>
+    <script>
+    	let myChart2 = document.getElementById("myChart2");
+    	var xValues1 = '{{pos}}';
+    	var xValues2 = '{{neg}}';
+    	var xValues3 = '{{neutral}}'
+			new Chart("myChart2", {
+			  type: "doughnut",
+			  data: {
+			    // labels: xValues,
+			    datasets: [{
+			      fill: false,
+			      lineTension: 0,
+			      backgroundColor: [
+						'rgb(255, 99, 132)',
+						'rgb(54, 162, 235)',
+						'rgb(255, 205, 86)'
+			      ],
+			      borderColor: "rrgb(255, 99, 132)",
+			      data: [xValues1, xValues2, xValues3],
+			      label: "World Sentiment Twitter Data"
+			    }]
+			  },
+			  options: {
+			    legend: {display: "true"},
+			  }
+			});
+    </script>
+  </body>
+</html>
