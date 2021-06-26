@@ -35,11 +35,11 @@ create_database()
 
 lock = Lock()
 
-ckey = "DkxpqWmgpvn30bZB25JrwwE90"
-APISecret = "PiuIQU7mjSgkjUQQu3rCXnqwlAhitNrwakimx5NAv0TGyT6gL6"
+ckey = #
+APISecret = #
 
-Access_token = "1389226167996010501-sqoxNOay1BkI1Nlr5T9gDPzcjIYs95"
-Access_Token_Secret = "wXkodqLycBo60uCXAq6fm5FN3dZR02fmmKut7wbtrk6kw"
+Access_token = #
+Access_Token_Secret = #
 
 
 class listener(StreamListener):
