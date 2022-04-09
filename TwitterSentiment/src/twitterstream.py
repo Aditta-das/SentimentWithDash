@@ -1,4 +1,5 @@
 from tweepy import Stream
+# import tweepy
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import json 
@@ -35,11 +36,11 @@ create_database()
 
 lock = Lock()
 
-ckey = #
-APISecret = #
+ckey = "ABInBrMou6hu1EXcBVByyVknv"
+APISecret = "npb2X2TlElPtlmvQl0Kg5FPEmEMvN1VpIfwq4hS58cHnoDPoft"
 
-Access_token = #
-Access_Token_Secret = #
+Access_token = "1389226167996010501-DzSzRnHDC2awYkgjMVJYv6M8nIfZVJ"
+Access_Token_Secret = "aQauEsTmJCrjPrzZFWaLw5GHxwNvMddo0flpG9U1Kft8Y"
 
 
 class listener(StreamListener):
@@ -50,7 +51,7 @@ class listener(StreamListener):
 		self.lock = lock
 		self.stop_words = set(stopwords.words("english"))
 		
-		super().__init__()
+		# super(listener, self).__init__()
 	
 	def save_in_database(self):
 		Timer(interval=1, function=self.save_in_database).start()
@@ -103,8 +104,8 @@ class listener(StreamListener):
 
 while True:
 	try:
-		auth = OAuthHandler(consumer_key=ckey, consumer_secret=APISecret)
-		auth.set_access_token(key=Access_token, secret=Access_Token_Secret)
+		auth = OAuthHandler(ckey, APISecret)
+		auth.set_access_token(Access_token, Access_Token_Secret)
 		twitterStream = Stream(auth, listener(lock))
 		twitterStream.filter(track=["a", "e", "i", "o", "u"])
 		# twitterStream.filter(track=["Clippers"])

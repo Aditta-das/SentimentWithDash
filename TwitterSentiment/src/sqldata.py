@@ -15,11 +15,11 @@ cur = con.cursor()
 # # print(df)
 df = pd.read_sql("SELECT * FROM sentiment WHERE tweet LIKE '%a%' ORDER BY create_at DESC LIMIT 100", con)
 # df.sort_values(by="create_at", inplace=True)
-df["mov_avg"] = df['score'].rolling(int(len(df)/5)).mean()
-df["date"] = pd.to_datetime(df["create_at"], unit="ms")
-df.set_index("date", inplace=True)
-df = df.resample('1s').mean()
-df.dropna(inplace=True)
+# df["mov_avg"] = df['score'].rolling(int(len(df)/5)).mean()
+# df["date"] = pd.to_datetime(df["create_at"], unit="ms")
+# df.set_index("date", inplace=True)
+# df = df.resample('1s').mean()
+# df.dropna(inplace=True)
 # df["mov_avg"] = df['score'].rolling(5).mean()
 # df.set_index("date", inplace=True)
 # # df = df[["mov_avg"]]
@@ -28,19 +28,19 @@ df.dropna(inplace=True)
 # # # df = df["mov_avg"]
 # df = df.to_dict()
 print(df)
-sentiment_color = {
-	'Positive': '#228C7B',
-	'Negative': '#F30E5C',
-	'Neutral': '#F6C523'
-}
+# sentiment_color = {
+# 	'Positive': '#228C7B',
+# 	'Negative': '#F30E5C',
+# 	'Neutral': '#F6C523'
+# }
 
-def senti_color(senti):
-	if senti == "Positive":
-		return sentiment_color["Positive"]
-	elif senti == "Negative":
-		return sentiment_color["Negative"]
-	else:
-		return sentiment_color["Neutral"]
+# def senti_color(senti):
+# 	if senti == "Positive":
+# 		return sentiment_color["Positive"]
+# 	elif senti == "Negative":
+# 		return sentiment_color["Negative"]
+# 	else:
+# 		return sentiment_color["Neutral"]
 
 # a = senti_color([(d[4], i) for d in df.values.tolist() for i in d])
 # print(a)

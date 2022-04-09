@@ -1,7 +1,7 @@
 import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
-from tweepy.streaming import StreamListener
+from tweepy.streaming import Stream
 ckey = "DkxpqWmgpvn30bZB25JrwwE90"
 APISecret = "PiuIQU7mjSgkjUQQu3rCXnqwlAhitNrwakimx5NAv0TGyT6gL6"
 

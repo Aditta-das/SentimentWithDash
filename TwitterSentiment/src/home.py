@@ -7,8 +7,10 @@ import plotly
 import plotly.express as px
 import plotly.graph_objs as go
 import dash 
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash_core_components as dcc
+from dash import dcc
+# import dash_html_components as html
+from dash import html
 from dash.dependencies import Input, Output, State
 
 
@@ -45,7 +47,7 @@ app.layout = html.Div([
 		
 	html.Div(className="col-md-12 mt-5", children=[html.Div(className="row", 
 		children=[
-			dcc.Input(id="search_term", className="form-control", value="neymar", type="text"),
+			dcc.Input(id="search_term", className="form-control", value="a", type="text"),
 			dcc.Graph(id='indicator-graphic', animate=False),
 			dcc.Interval(
 				id="indicator_graphic_update",
